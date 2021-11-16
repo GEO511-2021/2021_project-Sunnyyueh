@@ -60,7 +60,7 @@ library(GGally)
 svm <- read.csv2("/Users/sunnyyueh/Desktop/論文/WCN Data/da28_svm2016.csv", header=TRUE, sep=",")
 air.edge<-read.table("/Users/sunnyyueh/Desktop/論文/air Data/2014 airline .csv",sep=",",header = T)
 
-airport_name<-read.csv2("/Users/sunnyyueh/Desktop/論文/air Data/airport0825.csv",sep=",",header = T)
+airport_name<-read.csv2("/Users/sunnyyueh/Desktop/論文/air Data/airport0825.csv",sep=",",header = T) 
 
 ```
 

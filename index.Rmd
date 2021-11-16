@@ -59,9 +59,9 @@ library(GGally)
 
 ## Download and clean all required data
 ```{r}
-svm <- read.csv2("/Users/sunnyyueh/Desktop/論文/WCN Data/da28_svm2016.csv", header=TRUE, sep=",")
-air.edge<-read.table("/Users/sunnyyueh/Desktop/論文/air Data/2014 airline .csv",sep=",",header = T)
-airport_name<-read.csv2("/Users/sunnyyueh/Desktop/論文/air Data/airport0825.csv",sep=",",header = T) 
+svm <- read.csv2("data/da28_svm2016.csv", header=TRUE, sep=",")
+air.edge<-read.table("data/2014 airline .csv",sep=",",header = T)
+airport_name<-read.csv2("data/airport0825.csv",sep=",",header = T) 
 ```
 
 ## combining airline data and airport data
@@ -170,7 +170,7 @@ plot(city_nw)
 
 row.names(city_m)
 
-city_cor<- read.csv2("/Users/sunnyyueh/Desktop/論文/計畫書資料/Demo/20city_coor_1010.csv", header=TRUE, sep=",")
+city_cor<- read.csv2("data/20city_coor_1010.csv", header=TRUE, sep=",")
 
 
 

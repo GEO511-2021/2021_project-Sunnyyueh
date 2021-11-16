@@ -379,9 +379,9 @@ library(ggplot2)
 library(GGally)</code></pre>
 <div id="download-and-clean-all-required-data" class="section level2">
 <h2>Download and clean all required data</h2>
-<pre class="r"><code>svm &lt;- read.csv2(&quot;/Users/sunnyyueh/Desktop/論文/WCN Data/da28_svm2016.csv&quot;, header=TRUE, sep=&quot;,&quot;)
-air.edge&lt;-read.table(&quot;/Users/sunnyyueh/Desktop/論文/air Data/2014 airline .csv&quot;,sep=&quot;,&quot;,header = T)
-airport_name&lt;-read.csv2(&quot;/Users/sunnyyueh/Desktop/論文/air Data/airport0825.csv&quot;,sep=&quot;,&quot;,header = T) </code></pre>
+<pre class="r"><code>svm &lt;- read.csv2(&quot;data/da28_svm2016.csv&quot;, header=TRUE, sep=&quot;,&quot;)
+air.edge&lt;-read.table(&quot;data/2014 airline .csv&quot;,sep=&quot;,&quot;,header = T)
+airport_name&lt;-read.csv2(&quot;data/airport0825.csv&quot;,sep=&quot;,&quot;,header = T) </code></pre>
 </div>
 <div id="combining-airline-data-and-airport-data" class="section level2">
 <h2>combining airline data and airport data</h2>
@@ -487,7 +487,7 @@ plot(city_nw)</code></pre>
 ##  [6] &quot;Beijing&quot;     &quot;Paris&quot;       &quot;Tokyo&quot;       &quot;Dubai&quot;       &quot;Chicago&quot;    
 ## [11] &quot;Sydney&quot;      &quot;Frankfurt&quot;   &quot;Sao Paulo&quot;   &quot;Washington&quot;  &quot;Los Angeles&quot;
 ## [16] &quot;Toronto&quot;     &quot;Milan&quot;       &quot;Madrid&quot;      &quot;Mumbai&quot;      &quot;Seoul&quot;</code></pre>
-<pre class="r"><code>city_cor&lt;- read.csv2(&quot;/Users/sunnyyueh/Desktop/論文/計畫書資料/Demo/20city_coor_1010.csv&quot;, header=TRUE, sep=&quot;,&quot;)
+<pre class="r"><code>city_cor&lt;- read.csv2(&quot;data/20city_coor_1010.csv&quot;, header=TRUE, sep=&quot;,&quot;)
 
 
 

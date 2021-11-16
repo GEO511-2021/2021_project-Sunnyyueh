@@ -45,14 +45,15 @@ Here's my first code chunk.
 Load any required packages in a code chunk (you may need to install some packages):
 
 ```{r, message=F, warning=F}
-devtools::install_github("briatte/ggnet")
+# devtools::install_github("briatte/ggnet")
+# install.packages("ggnet")
 library(dplyr)
 library(igraph)
 library(network)
 library(intergraph)
 library(sna)
 library(ggplot2)
-library(ggnet)
+# library(ggnet)
 library(GGally)
 ```
 
@@ -60,9 +61,7 @@ library(GGally)
 ```{r}
 svm <- read.csv2("/Users/sunnyyueh/Desktop/論文/WCN Data/da28_svm2016.csv", header=TRUE, sep=",")
 air.edge<-read.table("/Users/sunnyyueh/Desktop/論文/air Data/2014 airline .csv",sep=",",header = T)
-
 airport_name<-read.csv2("/Users/sunnyyueh/Desktop/論文/air Data/airport0825.csv",sep=",",header = T) 
-
 ```
 
 ## combining airline data and airport data
@@ -194,17 +193,17 @@ world <- ggplot(world, aes(x = long, y = lat)) +
                fill = "#f9f9f9", size = 0.2)
 
 a<-as.vector((rnorm(342,0.5,0.4))^2)
-p <- ggnetworkmap(world,flights,
-                  node.color = "red3",
-                  node.alpha = 0.6,
-                  great.circles = FALSE,
-                  segment.color="gray60",
-                  label.nodes = TRUE,
-                  label.size = 3.5,
-                  size=10,
-                  segment.size = a)+
-  labs(color="nodes")
-plot(p)
+# p <- ggnetworkmap(world,flights,
+#                   node.color = "red3",
+#                   node.alpha = 0.6,
+#                   great.circles = FALSE,
+#                   segment.color="gray60",
+#                   label.nodes = TRUE,
+#                   label.size = 3.5,
+#                   size=10,
+#                   segment.size = a)+
+#   labs(color="nodes")
+# plot(p)
 
 
 ```

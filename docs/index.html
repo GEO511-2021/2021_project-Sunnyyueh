@@ -367,20 +367,20 @@ div.tocify {
 <p>See <a href="http://rmarkdown.rstudio.com/">http://rmarkdown.rstudio.com/</a> for all the amazing things you can do.</p>
 <p>Here’s my first code chunk.</p>
 <p>Load any required packages in a code chunk (you may need to install some packages):</p>
-<pre class="r"><code>devtools::install_github(&quot;briatte/ggnet&quot;)
+<pre class="r"><code># devtools::install_github(&quot;briatte/ggnet&quot;)
+# install.packages(&quot;ggnet&quot;)
 library(dplyr)
 library(igraph)
 library(network)
 library(intergraph)
 library(sna)
 library(ggplot2)
-library(ggnet)
+# library(ggnet)
 library(GGally)</code></pre>
 <div id="download-and-clean-all-required-data" class="section level2">
 <h2>Download and clean all required data</h2>
 <pre class="r"><code>svm &lt;- read.csv2(&quot;/Users/sunnyyueh/Desktop/論文/WCN Data/da28_svm2016.csv&quot;, header=TRUE, sep=&quot;,&quot;)
 air.edge&lt;-read.table(&quot;/Users/sunnyyueh/Desktop/論文/air Data/2014 airline .csv&quot;,sep=&quot;,&quot;,header = T)
-
 airport_name&lt;-read.csv2(&quot;/Users/sunnyyueh/Desktop/論文/air Data/airport0825.csv&quot;,sep=&quot;,&quot;,header = T) </code></pre>
 </div>
 <div id="combining-airline-data-and-airport-data" class="section level2">
@@ -511,20 +511,17 @@ world &lt;- ggplot(world, aes(x = long, y = lat)) +
                fill = &quot;#f9f9f9&quot;, size = 0.2)
 
 a&lt;-as.vector((rnorm(342,0.5,0.4))^2)
-p &lt;- ggnetworkmap(world,flights,
-                  node.color = &quot;red3&quot;,
-                  node.alpha = 0.6,
-                  great.circles = FALSE,
-                  segment.color=&quot;gray60&quot;,
-                  label.nodes = TRUE,
-                  label.size = 3.5,
-                  size=10,
-                  segment.size = a)+
-  labs(color=&quot;nodes&quot;)
-plot(p)</code></pre>
-<pre><code>## Warning: Removed 1 rows containing missing values (geom_point).</code></pre>
-<pre><code>## Warning: Removed 1 rows containing missing values (geom_text).</code></pre>
-<p><img src="index_files/figure-html/unnamed-chunk-7-3.png" width="672" /></p>
+# p &lt;- ggnetworkmap(world,flights,
+#                   node.color = &quot;red3&quot;,
+#                   node.alpha = 0.6,
+#                   great.circles = FALSE,
+#                   segment.color=&quot;gray60&quot;,
+#                   label.nodes = TRUE,
+#                   label.size = 3.5,
+#                   size=10,
+#                   segment.size = a)+
+#   labs(color=&quot;nodes&quot;)
+# plot(p)</code></pre>
 </div>
 </div>
 <div id="results" class="section level1">

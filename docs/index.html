@@ -367,7 +367,8 @@ div.tocify {
 <p>See <a href="http://rmarkdown.rstudio.com/">http://rmarkdown.rstudio.com/</a> for all the amazing things you can do.</p>
 <p>Here’s my first code chunk.</p>
 <p>Load any required packages in a code chunk (you may need to install some packages):</p>
-<pre class="r"><code>library(dplyr)
+<pre class="r"><code>devtools::install_github(&quot;briatte/ggnet&quot;)
+library(dplyr)
 library(igraph)
 library(network)
 library(intergraph)

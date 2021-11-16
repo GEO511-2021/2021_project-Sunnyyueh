@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+<meta name="author" content="Sunny" />
+
+
+<title>My Final Project Template</title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/simplex.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+
+
+<link rel="stylesheet" href="styles.css" type="text/css" />
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+<style type="text/css">
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #adb5bd;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script type="text/javascript">
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.tab('show');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row">
+<div class="col-sm-12 col-md-4 col-lg-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-sm-12 col-md-8 col-lg-9">
+
+
+
+
+<div class="navbar navbar-inverse  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Spatial Data Science Final Project</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Home</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div id="header">
+
+
+
+<h1 class="title toc-ignore">My Final Project Template</h1>
+<h3 class="subtitle">Economic interaction among cities after COVID-19</h3>
+<h4 class="author">Sunny</h4>
+
+</div>
+
+
+<div id="introduction" class="section level1">
+<h1>Introduction</h1>
+<p>[~ 200 words]</p>
+<p>Clearly stated background and questions / hypotheses / problems being addressed. Sets up the analysis in an interesting and compelling way.</p>
+<p>The outbreak of COVID-19 has caused a huge impact on the global economy. To estimate the global economy, the research scale has shifted from countries to cities, and researchers no longer merely focus on a single economic unit but try to estimate the interactions among cities. Thus, to understand the global economy under COVID-19, it is vital to look into the economic interactions among cities. The data set World City Network (WCN) and airline network have been applied to the research of city network, while WCN could estimate the interlocking network of cities through the global location strategies of Advance Produce Service (APS) firms, and the air links between cities are used to evaluate local economic development. However, the two datasets have difficulties estimating real-time city economic interaction during COVID-19. Thus, this study aims to apply social network analysis (SNA) to identify the possible mechanism of the rapid chaining economic city network. By applying QAP or exponential-family random graph models on WCN and airline datasets, this research will interpret the transformation of the role of cities and the configuration in the network before and after the outbreak of COVID-19.</p>
+</div>
+<div id="materials-and-methods" class="section level1">
+<h1>Materials and methods</h1>
+<p>[~ 200 words]</p>
+<p>Narrative: Clear narrative description of the data sources and methods. Includes data from at least two sources that were integrated / merged in R.</p>
+<p>Code: The code associated with the project is well organized and easy to follow. Demonstrates mastery of R graphics and functions.</p>
+<p>Data: The underlying data are publicly accessible via the web and downloaded/accessed within the Rmd script. If you want to use your own data, you must make it available on a website (e.g. Figshare) so that others are able to re-run your code.</p>
+<p>You can do bullets like this:</p>
+<ul>
+<li>The first most important thing</li>
+<li>The second most important thing</li>
+<li>The third most important thing</li>
+</ul>
+<p>You can do numbers like this:</p>
+<ol style="list-style-type: decimal">
+<li>The first most important thing</li>
+<li>The second most important thing</li>
+<li>The third most important thing</li>
+</ol>
+<p>See <a href="http://rmarkdown.rstudio.com/">http://rmarkdown.rstudio.com/</a> for all the amazing things you can do.</p>
+<p>Here’s my first code chunk.</p>
+<p>Load any required packages in a code chunk (you may need to install some packages):</p>
+<pre class="r"><code>library(dplyr)
+library(igraph)
+library(network)
+library(intergraph)
+library(sna)
+library(ggplot2)
+library(ggnet)
+library(GGally)</code></pre>
+<div id="download-and-clean-all-required-data" class="section level2">
+<h2>Download and clean all required data</h2>
+<pre class="r"><code>svm &lt;- read.csv2(&quot;/Users/sunnyyueh/Desktop/論文/WCN Data/da28_svm2016.csv&quot;, header=TRUE, sep=&quot;,&quot;)
+air.edge&lt;-read.table(&quot;/Users/sunnyyueh/Desktop/論文/air Data/2014 airline .csv&quot;,sep=&quot;,&quot;,header = T)
+
+airport_name&lt;-read.csv2(&quot;/Users/sunnyyueh/Desktop/論文/air Data/airport0825.csv&quot;,sep=&quot;,&quot;,header = T) </code></pre>
+</div>
+<div id="combining-airline-data-and-airport-data" class="section level2">
+<h2>combining airline data and airport data</h2>
+<pre class="r"><code>airport&lt;-c(&#39;JFK&#39;,&#39;LCY&#39;,&#39;HKG&#39;,&#39;SIN&#39;,&#39;PVG&#39;,&#39;PEK&#39;,&#39;CDG&#39;,&#39;HND&#39;,&#39;DXB&#39;,&#39;ORD&#39;,&#39;SYD&#39;,&#39;FRA&#39;,&#39;GRU&#39;,&#39;DCA&#39;,&#39;LAX&#39;,&#39;YYZ&#39;,&#39;MXP&#39;,&#39;MAD&#39;,&#39;BOM&#39;,&#39;ICN&#39;)
+city_list&lt;-c(&quot;London&quot;,&quot;New York&quot;,&quot;Hong Kong&quot;,&quot;Singapore&quot;,&quot;Shanghai&quot;,&quot;Paris&quot;,&quot;Beijing&quot;,&quot;Tokyo&quot;,&quot;Chicago&quot;,&quot;Dubai&quot;,&quot;Sydney&quot;,&quot;Frankfurt&quot;, &quot;Sao Paulo&quot;,&quot;Washington&quot;,&quot;Los Angeles&quot;,&quot;Milan&quot;,&quot;Madrid&quot;, &quot;Mumbai&quot;,&quot;Toronto&quot;,&quot;Moscow&quot;)
+
+airport&lt;-cbind(airport,city_list)
+air.edge&lt;-air.edge %&gt;%
+  filter(Source.airport == &quot;JFK&quot;|Source.airport == &quot;LCY&quot;|
+           Source.airport == &quot;HKG&quot;|Source.airport == &quot;SYD&quot;|
+           Source.airport == &quot;SIN&quot;|Source.airport == &quot;FRA&quot;|
+           Source.airport == &quot;PVG&quot;|Source.airport == &quot;GRU&quot;|
+           Source.airport == &quot;PEK&quot;|Source.airport == &quot;DCA&quot;|
+           Source.airport == &quot;CDG&quot;|Source.airport == &quot;LAX&quot;|
+           Source.airport == &quot;HND&quot;| Source.airport == &quot;YYZ&quot;|
+           Source.airport == &quot;DXB&quot;|Source.airport == &quot;MXP&quot;|
+           Source.airport == &quot;ORG&quot;|Source.airport == &quot;MAD&quot;|
+           Source.airport == &quot;BOM&quot;|Source.airport == &quot;ICN&quot;)
+
+air.edge&lt;-air.edge %&gt;%
+  filter(Destination.airport == &quot;JFK&quot;|Destination.airport == &quot;LCY&quot;|
+           Destination.airport == &quot;HKG&quot;|Destination.airport == &quot;SYD&quot;|
+           Destination.airport == &quot;SIN&quot;|Destination.airport == &quot;FRA&quot;|
+           Destination.airport == &quot;PVG&quot;|Destination.airport == &quot;GRU&quot;|
+           Destination.airport == &quot;PEK&quot;|Destination.airport == &quot;DCA&quot;|
+           Destination.airport == &quot;CDG&quot;|Destination.airport == &quot;LAX&quot;|
+           Destination.airport == &quot;HND&quot;| Destination.airport == &quot;YYZ&quot;|
+           Destination.airport == &quot;DXB&quot;|Destination.airport == &quot;MXP&quot;|
+           Destination.airport == &quot;ORG&quot;|Destination.airport == &quot;MAD&quot;|
+           Destination.airport == &quot;BOM&quot;|Destination.airport == &quot;ICN&quot;)
+
+air.edge</code></pre>
+<pre><code>Source.airport Destination.airport</code></pre>
+<p>1 HKG SIN 2 SIN HKG 3 BOM DXB 4 DXB BOM 5 HKG ICN 6 ICN HKG 7 HKG PVG 8 PVG HKG 9 PVG SIN 10 SIN PVG 11 BOM DXB 12 BOM HKG 13 BOM SIN 14 DXB BOM 15 HKG BOM 16 SIN BOM 17 CDG JFK 18 DCA JFK 19 DCA LAX 20 DCA YYZ 21 GRU JFK 22 GRU LAX 23 HKG JFK 24 HKG LAX 25 JFK CDG 26 JFK DCA 27 JFK GRU 28 JFK HKG 29 JFK LAX 30 JFK LCY 31 JFK MAD 32 JFK MXP 33 JFK YYZ 34 LAX DCA 35 LAX GRU 36 LAX HKG 37 LAX JFK 38 LAX MAD 39 LAX PVG 40 LAX SYD 41 LAX YYZ 42 MAD JFK 43 MAD LAX 44 MXP JFK 45 PVG LAX 46 SYD LAX 47 YYZ DCA 48 YYZ JFK 49 YYZ LAX 50 FRA LCY 51 FRA MAD 52 LCY FRA 53 MAD FRA 54 CDG YYZ 55 DCA YYZ 56 FRA YYZ 57 GRU YYZ 58 HKG YYZ 59 JFK YYZ 60 LAX YYZ 61 PEK YYZ 62 PVG YYZ 63 YYZ CDG 64 YYZ DCA 65 YYZ FRA 66 YYZ GRU 67 YYZ HKG 68 YYZ JFK 69 YYZ LAX 70 YYZ PEK 71 YYZ PVG 72 BOM CDG 73 CDG BOM 74 CDG DXB 75 CDG FRA 76 CDG GRU 77 CDG HKG 78 CDG HND 79 CDG ICN 80 CDG JFK 81 CDG LAX 82 CDG MAD 83 CDG PEK 84 CDG PVG 85 CDG SIN 86 CDG YYZ 87 DXB CDG 88 FRA CDG 89 FRA JFK 90 GRU CDG 91 HKG CDG 92 HND CDG 93 ICN CDG 94 JFK CDG 95 JFK FRA 96 JFK MAD 97 LAX CDG 98 MAD CDG 99 MAD JFK 100 PEK CDG 101 PVG CDG 102 SIN CDG 103 YYZ CDG 104 BOM DXB 105 BOM FRA 106 DXB BOM 107 FRA BOM 108 HKG ICN 109 HKG SIN 110 ICN HKG 111 ICN SIN 112 SIN HKG 113 SIN ICN 114 DCA LAX 115 JFK LAX 116 LAX DCA 117 LAX JFK 118 CDG JFK 119 FRA MAD 120 HKG SYD 121 JFK CDG 122 JFK LCY 123 JFK MAD 124 JFK MXP 125 JFK YYZ 126 LAX MAD 127 MAD FRA 128 MAD JFK 129 MAD LAX 130 MXP JFK 131 SYD HKG 132 YYZ JFK 133 CDG DXB 134 CDG HKG 135 CDG JFK 136 CDG LAX 137 CDG YYZ 138 DXB CDG 139 HKG CDG 140 ICN MXP 141 JFK CDG 142 JFK MXP 143 JFK YYZ 144 LAX CDG 145 MXP JFK 146 YYZ CDG 147 DXB JFK 148 DXB LAX 149 DXB MXP 150 JFK DXB 151 JFK LAX 152 JFK MXP 153 LAX DXB 154 LAX JFK 155 MXP DXB 156 MXP JFK 157 CDG JFK 158 FRA LCY 159 JFK CDG 160 JFK LCY 161 JFK MAD 162 JFK MXP 163 LAX MAD 164 LCY FRA 165 LCY MAD 166 MAD JFK 167 MAD LAX 168 MAD LCY 169 MXP JFK 170 SIN SYD 171 SYD SIN 172 CDG PEK 173 CDG PVG 174 DXB PEK 175 FRA PEK 176 FRA PVG 177 GRU MAD 178 HKG PEK 179 HND PEK 180 ICN PEK 181 JFK PEK 182 LAX PEK 183 LAX PVG 184 MAD GRU 185 MAD PEK 186 MXP PEK 187 MXP PVG 188 PEK CDG 189 PEK DXB 190 PEK FRA 191 PEK HKG 192 PEK HND 193 PEK ICN 194 PEK JFK 195 PEK LAX 196 PEK MAD 197 PEK MXP 198 PEK PVG 199 PEK SIN 200 PEK SYD 201 PEK YYZ 202 PVG CDG 203 PVG FRA 204 PVG LAX 205 PVG MXP 206 PVG PEK 207 PVG SYD 208 PVG YYZ 209 SIN PEK 210 SYD PEK 211 SYD PVG 212 YYZ PEK 213 YYZ PVG 214 BOM HKG 215 CDG HKG 216 DXB HKG 217 FRA HKG 218 HKG BOM 219 HKG CDG 220 HKG DXB 221 HKG FRA 222 HKG HND 223 HKG ICN 224 HKG JFK 225 HKG LAX 226 HKG MXP 227 HKG PEK 228 HKG PVG 229 HKG SIN 230 HKG SYD 231 HKG YYZ 232 HND HKG 233 ICN HKG 234 JFK HKG 235 LAX HKG 236 MXP HKG 237 PEK HKG 238 PVG HKG 239 SIN HKG 240 SYD HKG 241 YYZ HKG 242 HKG PEK 243 ICN PEK 244 ICN PVG 245 PEK HKG 246 PEK ICN 247 PEK PVG 248 PVG ICN 249 PVG PEK 250 CDG JFK 251 CDG LAX 252 CDG YYZ 253 DCA JFK 254 DCA LAX 255 FRA JFK 256 GRU JFK 257 HND LAX 258 ICN JFK 259 ICN LAX 260 JFK CDG 261 JFK DCA 262 JFK FRA 263 JFK GRU 264 JFK ICN 265 JFK LAX 266 JFK MAD 267 JFK MXP 268 JFK PVG 269 JFK YYZ 270 LAX CDG 271 LAX DCA 272 LAX HND 273 LAX ICN 274 LAX JFK 275 LAX PVG 276 LAX SYD 277 MAD JFK 278 MXP JFK 279 PVG JFK 280 PVG LAX 281 SYD LAX 282 YYZ CDG 283 YYZ JFK 284 BOM DXB 285 CDG DXB 286 DXB BOM 287 DXB CDG 288 DXB FRA 289 DXB GRU 290 DXB HKG 291 DXB HND 292 DXB ICN 293 DXB JFK 294 DXB LAX 295 DXB MAD 296 DXB MXP 297 DXB PEK 298 DXB PVG 299 DXB SIN 300 DXB SYD 301 DXB YYZ 302 FRA DXB 303 GRU DXB 304 HKG DXB 305 HND DXB 306 ICN DXB 307 JFK DXB 308 JFK MXP 309 LAX DXB 310 MAD DXB 311 MXP DXB 312 MXP JFK 313 PEK DXB 314 PVG DXB 315 SIN DXB 316 SIN SYD 317 SYD DXB 318 SYD SIN 319 YYZ DXB 320 DXB SIN 321 FRA JFK 322 FRA MAD 323 FRA MXP 324 HKG ICN 325 ICN HKG 326 JFK FRA 327 MAD FRA 328 MXP FRA 329 SIN DXB 330 SIN SYD 331 SYD SIN 332 BOM HKG 333 CDG JFK 334 HKG BOM 335 JFK CDG 336 HKG PVG 337 ICN PVG 338 PVG HKG 339 PVG ICN 340 GRU JFK 341 JFK GRU 342 BOM SIN 343 SIN BOM 344 HKG PVG 345 PVG HKG 346 HKG PEK 347 LAX PVG 348 PEK HKG 349 PEK YYZ 350 PVG LAX 351 YYZ PEK 352 HKG PEK 353 HKG PVG 354 PEK HKG 355 PVG HKG 356 CDG JFK 357 FRA MAD 358 GRU MAD 359 JFK CDG 360 JFK LCY 361 JFK MAD 362 JFK MXP 363 LAX MAD 364 LCY MAD 365 MAD FRA 366 MAD GRU 367 MAD JFK 368 MAD LAX 369 MAD LCY 370 MAD MXP 371 MXP JFK 372 MXP MAD 373 SIN SYD 374 SYD SIN 375 CDG GRU 376 CDG PEK 377 FRA GRU 378 GRU CDG 379 GRU FRA 380 GRU JFK 381 GRU MAD 382 GRU MXP 383 GRU YYZ 384 JFK GRU 385 MAD GRU 386 MAD PEK 387 MXP GRU 388 PEK CDG 389 PEK MAD 390 YYZ GRU 391 CDG HND 392 DXB HND 393 HKG HND 394 HND CDG 395 HND DXB 396 HND HKG 397 HND PEK 398 HND SIN 399 PEK HND 400 SIN HND 401 HKG PEK 402 HKG PVG 403 PEK HKG 404 PVG HKG 405 BOM ICN 406 CDG ICN 407 DXB ICN 408 FRA ICN 409 GRU LAX 410 HKG ICN 411 HND ICN 412 ICN BOM 413 ICN CDG 414 ICN DXB 415 ICN FRA 416 ICN HKG 417 ICN HND 418 ICN JFK 419 ICN LAX 420 ICN MAD 421 ICN MXP 422 ICN PEK 423 ICN PVG 424 ICN SIN 425 ICN SYD 426 ICN YYZ 427 JFK ICN 428 LAX GRU 429 LAX ICN 430 MAD ICN 431 PEK ICN 432 PVG ICN 433 SIN ICN 434 SYD ICN 435 YYZ ICN 436 FRA JFK 437 JFK FRA 438 JFK MAD 439 MAD JFK 440 FRA MAD 441 GRU MAD 442 MAD FRA 443 MAD GRU 444 BOM FRA 445 CDG FRA 446 CDG YYZ 447 DXB FRA 448 FRA BOM 449 FRA CDG 450 FRA DXB 451 FRA GRU 452 FRA HKG 453 FRA HND 454 FRA ICN 455 FRA JFK 456 FRA LAX 457 FRA LCY 458 FRA MAD 459 FRA MXP 460 FRA PEK 461 FRA PVG 462 FRA SIN 463 FRA YYZ 464 GRU FRA 465 HKG FRA 466 HND FRA 467 ICN FRA 468 JFK FRA 469 LAX FRA 470 LCY FRA 471 MAD FRA 472 MXP FRA 473 PEK FRA 474 PVG FRA 475 SIN FRA 476 YYZ CDG 477 YYZ FRA 478 HKG ICN 479 ICN HKG 480 DXB SIN 481 SIN DXB 482 CDG PEK 483 CDG PVG 484 FRA PVG 485 HKG PVG 486 HND PEK 487 ICN PVG 488 JFK PVG 489 LAX PVG 490 PEK CDG 491 PEK HND 492 PEK PVG 493 PVG CDG 494 PVG FRA 495 PVG HKG 496 PVG ICN 497 PVG JFK 498 PVG LAX 499 PVG PEK 500 PVG SIN 501 PVG SYD 502 SIN PVG 503 SIN SYD 504 SYD PVG 505 SYD SIN 506 CDG HND 507 FRA HND 508 HKG HND 509 HND CDG 510 HND FRA 511 HND HKG 512 HND ICN 513 HND LAX 514 HND PEK 515 HND SIN 516 ICN HND 517 LAX HND 518 PEK HND 519 PEK PVG 520 PVG PEK 521 SIN HND 522 LAX SYD 523 PEK PVG 524 PVG PEK 525 PVG SYD 526 SYD LAX 527 SYD PVG 528 CDG ICN 529 FRA ICN 530 HKG ICN 531 HND ICN 532 ICN CDG 533 ICN FRA 534 ICN HKG 535 ICN HND 536 ICN JFK 537 ICN LAX 538 ICN PEK 539 ICN PVG 540 ICN SIN 541 ICN SYD 542 JFK ICN 543 LAX ICN 544 PEK ICN 545 PVG ICN 546 SIN ICN 547 SYD ICN 548 CDG MXP 549 MXP CDG 550 DXB FRA 551 DXB SIN 552 DXB SYD 553 FRA DXB 554 HKG SYD 555 HND SIN 556 ICN SYD 557 JFK LAX 558 LAX JFK 559 LAX SYD 560 PVG SYD 561 SIN DXB 562 SIN HND 563 SIN SYD 564 SYD DXB 565 SYD HKG 566 SYD ICN 567 SYD LAX 568 SYD PVG 569 SYD SIN 570 CDG JFK 571 JFK CDG 572 JFK MXP 573 MXP JFK 574 CDG JFK 575 JFK CDG 576 BOM SIN 577 CDG SIN 578 DXB SIN 579 FRA JFK 580 FRA SIN 581 HKG SIN 582 HND SIN 583 ICN SIN 584 JFK FRA 585 MXP SIN 586 PEK SIN 587 PVG SIN 588 SIN BOM 589 SIN CDG 590 SIN DXB 591 SIN FRA 592 SIN HKG 593 SIN HND 594 SIN ICN 595 SIN MXP 596 SIN PEK 597 SIN PVG 598 SIN SYD 599 SYD SIN 600 HKG ICN 601 ICN HKG 602 ICN LAX 603 LAX ICN 604 ICN SYD 605 SYD ICN 606 CDG LAX 607 LAX CDG 608 HKG SIN 609 SIN HKG 610 CDG YYZ 611 YYZ CDG 612 HKG SIN 613 SIN HKG 614 SIN SYD 615 SYD SIN 616 CDG MAD 617 CDG MXP 618 MAD CDG 619 MAD MXP 620 MXP CDG 621 MXP MAD 622 FRA JFK 623 FRA LAX 624 HKG SIN 625 HND LAX 626 ICN JFK 627 ICN LAX 628 JFK FRA 629 JFK ICN 630 JFK LAX 631 JFK PEK 632 LAX FRA 633 LAX HND 634 LAX ICN 635 LAX JFK 636 LAX PEK 637 LAX PVG 638 LAX SYD 639 LAX YYZ 640 PEK JFK 641 PEK LAX 642 PVG LAX 643 SIN HKG 644 SYD LAX 645 YYZ LAX 646 HKG HND 647 HKG ICN 648 HND HKG 649 ICN HKG 650 CDG JFK 651 DCA JFK 652 DCA LAX 653 DCA YYZ 654 FRA JFK 655 FRA SIN 656 GRU JFK 657 GRU LAX 658 HKG SIN 659 ICN SIN 660 JFK CDG 661 JFK DCA 662 JFK FRA 663 JFK GRU 664 JFK LAX 665 JFK MAD 666 JFK MXP 667 JFK PEK 668 JFK YYZ 669 LAX DCA 670 LAX GRU 671 LAX JFK 672 LAX PEK 673 LAX PVG 674 LAX YYZ 675 MAD JFK 676 MXP JFK 677 PEK JFK 678 PEK LAX 679 SIN FRA 680 SIN HKG 681 SIN ICN 682 YYZ DCA 683 YYZ JFK 684 YYZ LAX 685 FRA MAD 686 GRU MAD 687 JFK MAD 688 MAD FRA 689 MAD GRU 690 MAD JFK 691 MAD MXP 692 MXP MAD 693 LAX SYD 694 SIN SYD 695 SYD HKG 696 SYD LAX 697 SYD SIN 698 FRA MAD 699 MAD FRA 700 SYD HKG 701 JFK LAX 702 LAX JFK 703 CDG MAD 704 MAD CDG 705 JFK YYZ 706 LAX YYZ 707 YYZ JFK 708 YYZ LAX 709 HKG ICN 710 ICN HKG 711 PEK PVG 712 PVG PEK</p>
+<pre class="r"><code>air.edge&lt;-merge(air.edge,airport,by.x=&quot;Source.airport&quot;,by.y=&quot;airport&quot;,all.x=TRUE)
+names(air.edge)[3]&lt;-&quot;Source&quot;
+air.edge&lt;-merge(air.edge,airport,by.x=&quot;Destination.airport&quot;,by.y=&quot;airport&quot;,all.x=TRUE)
+names(air.edge[4])&lt;-&quot;Destination&quot;
+air.edge&lt;-air.edge[3:4]</code></pre>
+<pre class="r"><code>air.g&lt;- graph.data.frame(air.edge,directed = F)
+#V(air.g)$name&lt;-V(air.g)$city_list  
+
+plot(air.g)</code></pre>
+<p><img src="index_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+<pre class="r"><code>Cities &lt;- svm[,&quot;City&quot;]
+Firms &lt;- colnames(svm)[-c(1:3)]
+svm &lt;- svm[,-c(1:3)]
+row.names(svm) &lt;- Cities
+svm_mat &lt;- data.matrix(svm, rownames.force=TRUE)
+
+#finding top 20 firms 
+firm_sum&lt;-as.data.frame(colSums(svm_mat))
+firm20&lt;-firm_sum%&gt;%
+  arrange(desc(colSums(svm_mat)))%&gt;%
+  slice(n=1:20)
+firm_list&lt;-row.names(firm20)
+
+
+#finding top 20 cities
+city_sum&lt;-as.data.frame(rowSums(svm_mat))
+city20&lt;-city_sum%&gt;%
+  arrange(desc(rowSums(svm_mat)))%&gt;%
+  slice(n=1:20)
+city_list&lt;-row.names(city20)
+
+
+svm_mat_small&lt;-svm_mat[city_list,]
+svm_mat_small&lt;-svm_mat_small[,firm_list]
+
+
+city_m&lt;-tcrossprod(svm_mat_small, y=NULL)
+firm_m&lt;-tcrossprod(t(svm_mat_small), y=NULL)
+
+# nw &lt;- cbind(rbind(firm_nw, diag(20)), rbind(diag(20), city_nw))
+# nw &lt;- network(nw, directed = T)
+# nw%v%&quot;layer.mem&quot; &lt;- c(rep(1, 20), rep(2, 20)) 
+# nw%v%&quot;type&quot; &lt;- rep(types, 2)
+
+diag(firm_m)&lt;-0
+firm_m&lt;-firm_m*0.01
+firm_m&lt;-rbind(firm_m[1:15,]*0,firm_m[16:20,])
+firm.g&lt;- graph.adjacency(firm_m, mode=&quot;undirected&quot;,weighted = NULL)
+plot(firm.g)</code></pre>
+<p><img src="index_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+<pre class="r"><code>plot(firm.g, 
+     vertex.color=&quot;steelblue2&quot;,  #node color
+     vertex.size=15,# node size
+     vertex.label.color=&quot;black&quot;,  #text color
+     vertex.label.dist=3,   # text of distance from node
+     edge.color=&quot;grey74&quot;,   #edges color
+     edge.width=0.5,
+     alpha=0.5,
+     vertex.shape=&quot;square&quot;,
+     layout=layout_nicely(firm.g),
+     vertex.frame.color=&quot;#ffffff&quot;)   # lwd of edges</code></pre>
+<p><img src="index_files/figure-html/unnamed-chunk-6-2.png" width="672" /></p>
+<pre class="r"><code>city_m&lt;-tcrossprod((svm_mat_small), y=NULL)
+city_nw &lt;- graph.incidence(city_m,mode = c(&quot;all&quot;),weighted = T,directed = F)
+plot(city_nw)</code></pre>
+<p><img src="index_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+<pre class="r"><code>row.names(city_m)</code></pre>
+<pre><code>##  [1] &quot;New York&quot;    &quot;London&quot;      &quot;Hong Kong&quot;   &quot;Singapore&quot;   &quot;Shanghai&quot;   
+##  [6] &quot;Beijing&quot;     &quot;Paris&quot;       &quot;Tokyo&quot;       &quot;Dubai&quot;       &quot;Chicago&quot;    
+## [11] &quot;Sydney&quot;      &quot;Frankfurt&quot;   &quot;Sao Paulo&quot;   &quot;Washington&quot;  &quot;Los Angeles&quot;
+## [16] &quot;Toronto&quot;     &quot;Milan&quot;       &quot;Madrid&quot;      &quot;Mumbai&quot;      &quot;Seoul&quot;</code></pre>
+<pre class="r"><code>city_cor&lt;- read.csv2(&quot;/Users/sunnyyueh/Desktop/論文/計畫書資料/Demo/20city_coor_1010.csv&quot;, header=TRUE, sep=&quot;,&quot;)
+
+
+
+city_nw&lt;-set_vertex_attr(graph=city_nw,name=&quot;lat&quot;, value=city_cor$lat)
+city_nw&lt;-set_vertex_attr(graph=city_nw,name=&quot;lon&quot;, value=city_cor$lon)
+
+plot(city_nw)# feed centroid coordinates to igraph)</code></pre>
+<p><img src="index_files/figure-html/unnamed-chunk-7-2.png" width="672" /></p>
+<pre class="r"><code>flights &lt;- network(city_m, directed = TRUE)
+
+flights %v% &quot;lat&quot; &lt;- as.numeric(city_cor$lat)
+flights %v% &quot;lon&quot; &lt;- as.numeric(city_cor$lon)</code></pre>
+<pre><code>## Warning: NAs introduced by coercion</code></pre>
+<pre class="r"><code>flights %v% &quot;City&quot;&lt;-city_cor$City
+
+invisible(lapply(c(&quot;ggplot2&quot;, &quot;maps&quot;, &quot;network&quot;, &quot;sna&quot;), base::library, character.only = TRUE))
+
+world &lt;- fortify(map(&quot;world&quot;, plot = FALSE, fill = TRUE))
+world &lt;- ggplot(world, aes(x = long, y = lat)) +
+  geom_polygon(aes(group = group), color = &quot;grey65&quot;,
+               fill = &quot;#f9f9f9&quot;, size = 0.2)
+
+a&lt;-as.vector((rnorm(342,0.5,0.4))^2)
+p &lt;- ggnetworkmap(world,flights,
+                  node.color = &quot;red3&quot;,
+                  node.alpha = 0.6,
+                  great.circles = FALSE,
+                  segment.color=&quot;gray60&quot;,
+                  label.nodes = TRUE,
+                  label.size = 3.5,
+                  size=10,
+                  segment.size = a)+
+  labs(color=&quot;nodes&quot;)
+plot(p)</code></pre>
+<pre><code>## Warning: Removed 1 rows containing missing values (geom_point).</code></pre>
+<pre><code>## Warning: Removed 1 rows containing missing values (geom_text).</code></pre>
+<p><img src="index_files/figure-html/unnamed-chunk-7-3.png" width="672" /></p>
+</div>
+</div>
+<div id="results" class="section level1">
+<h1>Results</h1>
+<p>[~200 words]</p>
+<p>Tables and figures (maps and other graphics) are carefully planned to convey the results of your analysis. Intense exploration and evidence of many trials and failures. The author looked at the data in many different ways before coming to the final presentation of the data.</p>
+<p>Show tables, plots, etc. and describe them.</p>
+</div>
+<div id="conclusions" class="section level1">
+<h1>Conclusions</h1>
+<p>[~200 words]</p>
+<p>Clear summary adequately describing the results and putting them in context. Discussion of further questions and ways to continue investigation.</p>
+</div>
+<div id="references" class="section level1">
+<h1>References</h1>
+<p>All sources are cited in a consistent manner</p>
+</div>
+
+<!-- give the footer some space -->
+<br/>
+<br/>
+
+<footer id="site-footer">
+  <div id="footer1">
+  This website is a project for Adam Wilson's <a href="https://wilsonlab.io/GEO511"><i> Spatial Data Science (GEO511) </i></a>Course at the University at Buffalo
+  </div>
+  <div id="footer2">
+  <a rel="license" property="http://creativecommons.org/ns#license"
+  href="http://creativecommons.org/licenses/by/4.0/" ><img src="img/cc-by.svg" alt="cc-by"/></a> 
+  </div>
+</footer>
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+
+</body>
+</html>

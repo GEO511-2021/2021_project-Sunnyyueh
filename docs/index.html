@@ -375,7 +375,7 @@ library(network)
 library(intergraph)
 library(sna)
 library(ggplot2)
-library(ggnet)
+#library(ggnet)
 library(GGally)</code></pre>
 <div id="download-and-clean-all-required-data" class="section level2">
 <h2>Download and clean all required data</h2>
@@ -511,28 +511,25 @@ flights %v% &quot;lon&quot; &lt;- as.numeric(city_cor$lon)</code></pre>
 <pre><code>## Warning: NAs introduced by coercion</code></pre>
 <pre class="r"><code>flights %v% &quot;City&quot;&lt;- city_cor$City
 
-invisible(lapply(c(&quot;ggplot2&quot;, &quot;maps&quot;, &quot;network&quot;, &quot;sna&quot;), base::library, character.only = TRUE))
-
-world &lt;- fortify(maps::map(&quot;world&quot;, plot = FALSE, fill = TRUE))
-world &lt;- ggplot(world, aes(x = long, y = lat)) +
-  geom_polygon(aes(group = group), color = &quot;grey65&quot;,
-               fill = &quot;#f9f9f9&quot;, size = 0.2)
-
-a&lt;-as.vector((rnorm(342,0.5,0.4))^2)
-p &lt;- ggnetworkmap(world,flights,
-                  node.color = &quot;red3&quot;,
-                  node.alpha = 0.6,
-                  great.circles = FALSE,
-                  segment.color=&quot;gray60&quot;,
-                  label.nodes = TRUE,
-                  label.size = 3.5,
-                  size=10,
-                  segment.size = a)+
-  labs(color=&quot;nodes&quot;)
-plot(p)</code></pre>
-<pre><code>## Warning: Removed 1 rows containing missing values (geom_point).</code></pre>
-<pre><code>## Warning: Removed 1 rows containing missing values (geom_text).</code></pre>
-<p><img src="index_files/figure-html/unnamed-chunk-7-3.png" /><!-- --></p>
+# invisible(lapply(c(&quot;ggplot2&quot;, &quot;maps&quot;, &quot;network&quot;, &quot;sna&quot;), base::library, character.only = TRUE))
+# 
+# world &lt;- fortify(maps::map(&quot;world&quot;, plot = FALSE, fill = TRUE))
+# world &lt;- ggplot(world, aes(x = long, y = lat)) +
+#   geom_polygon(aes(group = group), color = &quot;grey65&quot;,
+#                fill = &quot;#f9f9f9&quot;, size = 0.2)
+# 
+# a&lt;-as.vector((rnorm(342,0.5,0.4))^2)
+# p &lt;- ggnetworkmap(world,flights,
+#                   node.color = &quot;red3&quot;,
+#                   node.alpha = 0.6,
+#                   great.circles = FALSE,
+#                   segment.color=&quot;gray60&quot;,
+#                   label.nodes = TRUE,
+#                   label.size = 3.5,
+#                   size=10,
+#                   segment.size = a)+
+#   labs(color=&quot;nodes&quot;)
+# plot(p)</code></pre>
 <pre class="r"><code>library(mapview) 
 library(leaflet)
 #mapview(flights)</code></pre>

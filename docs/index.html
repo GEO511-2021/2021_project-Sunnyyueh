@@ -375,7 +375,7 @@ library(network)
 library(intergraph)
 library(sna)
 library(ggplot2)
-# library(ggnet)
+library(ggnet)
 library(GGally)</code></pre>
 <div id="download-and-clean-all-required-data" class="section level2">
 <h2>Download and clean all required data</h2>
@@ -424,11 +424,20 @@ air.edge&lt;-air.edge[3:4]</code></pre>
 <pre class="r"><code>air.g&lt;- graph.data.frame(air.edge,directed = F)
 #V(air.g)$name&lt;-V(air.g)$city_list  
 
-plot(air.g)</code></pre>
-<p><img src="index_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
-<pre class="r"><code>Cities &lt;- svm[,&quot;City&quot;]
-Firms &lt;- colnames(svm)[-c(1:3)]
-svm &lt;- svm[,-c(1:3)]
+plot(air.g,
+     vertex.color=&quot;darkgoldenrod1&quot;,  #node color
+     vertex.size=15,# node size
+     node.alpha = 0.6,
+     vertex.label.color=&quot;black&quot;,  #text color
+     vertex.label.dist=3,   # text of distance from node
+     edge.color=&quot;grey74&quot;,   #edges color
+     edge.width=0.5,
+     layout=layout_nicely(air.g),
+     alpha=0.5)</code></pre>
+<p><img src="index_files/figure-html/unnamed-chunk-5-1.png" /><!-- --></p>
+<pre class="r"><code>Cities &lt;- rownames(svm)
+Firms &lt;- colnames(svm)
+# svm &lt;- svm[,-c(1:3)]
 row.names(svm) &lt;- Cities
 svm_mat &lt;- data.matrix(svm, rownames.force=TRUE)
 
@@ -457,16 +466,15 @@ firm_m&lt;-tcrossprod(t(svm_mat_small), y=NULL)
 
 # nw &lt;- cbind(rbind(firm_nw, diag(20)), rbind(diag(20), city_nw))
 # nw &lt;- network(nw, directed = T)
-# nw%v%&quot;layer.mem&quot; &lt;- c(rep(1, 20), rep(2, 20)) 
+# nw%v%&quot;layer.mem&quot; &lt;- c(rep(1, 20), rep(2, 20))
 # nw%v%&quot;type&quot; &lt;- rep(types, 2)
 
 diag(firm_m)&lt;-0
 firm_m&lt;-firm_m*0.01
 firm_m&lt;-rbind(firm_m[1:15,]*0,firm_m[16:20,])
-firm.g&lt;- graph.adjacency(firm_m, mode=&quot;undirected&quot;,weighted = NULL)
-plot(firm.g)</code></pre>
-<p><img src="index_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
-<pre class="r"><code>plot(firm.g, 
+firm.g&lt;- graph.adjacency(firm_m, mode=&quot;undirected&quot;,weighted = NULL) #igraph
+#plot(firm.g)
+plot(firm.g, 
      vertex.color=&quot;steelblue2&quot;,  #node color
      vertex.size=15,# node size
      vertex.label.color=&quot;black&quot;,  #text color
@@ -477,16 +485,16 @@ plot(firm.g)</code></pre>
      vertex.shape=&quot;square&quot;,
      layout=layout_nicely(firm.g),
      vertex.frame.color=&quot;#ffffff&quot;)   # lwd of edges</code></pre>
-<p><img src="index_files/figure-html/unnamed-chunk-6-2.png" width="672" /></p>
+<p><img src="index_files/figure-html/unnamed-chunk-6-1.png" /><!-- --></p>
 <pre class="r"><code>city_m&lt;-tcrossprod((svm_mat_small), y=NULL)
-city_nw &lt;- graph.incidence(city_m,mode = c(&quot;all&quot;),weighted = T,directed = F)
+diag(city_m)&lt;-0
+city_m&lt;- as.matrix(city_m)
+city_nw &lt;- graph.incidence(city_m,weighted = T) #network
 plot(city_nw)</code></pre>
-<p><img src="index_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+<p><img src="index_files/figure-html/unnamed-chunk-7-1.png" /><!-- --></p>
 <pre class="r"><code>row.names(city_m)</code></pre>
-<pre><code>##  [1] &quot;New York&quot;    &quot;London&quot;      &quot;Hong Kong&quot;   &quot;Singapore&quot;   &quot;Shanghai&quot;   
-##  [6] &quot;Beijing&quot;     &quot;Paris&quot;       &quot;Tokyo&quot;       &quot;Dubai&quot;       &quot;Chicago&quot;    
-## [11] &quot;Sydney&quot;      &quot;Frankfurt&quot;   &quot;Sao Paulo&quot;   &quot;Washington&quot;  &quot;Los Angeles&quot;
-## [16] &quot;Toronto&quot;     &quot;Milan&quot;       &quot;Madrid&quot;      &quot;Mumbai&quot;      &quot;Seoul&quot;</code></pre>
+<pre><code>##  [1] &quot;665&quot; &quot;707&quot; &quot;581&quot; &quot;664&quot; &quot;627&quot; &quot;448&quot; &quot;686&quot; &quot;671&quot; &quot;690&quot; &quot;698&quot; &quot;629&quot; &quot;673&quot;
+## [13] &quot;573&quot; &quot;697&quot; &quot;638&quot; &quot;667&quot; &quot;696&quot; &quot;646&quot; &quot;589&quot; &quot;601&quot;</code></pre>
 <pre class="r"><code>city_cor&lt;- read.csv2(&quot;data/20city_coor_1010.csv&quot;, header=TRUE, sep=&quot;,&quot;)
 
 
@@ -495,33 +503,39 @@ city_nw&lt;-set_vertex_attr(graph=city_nw,name=&quot;lat&quot;, value=city_cor$l
 city_nw&lt;-set_vertex_attr(graph=city_nw,name=&quot;lon&quot;, value=city_cor$lon)
 
 plot(city_nw)# feed centroid coordinates to igraph)</code></pre>
-<p><img src="index_files/figure-html/unnamed-chunk-7-2.png" width="672" /></p>
+<p><img src="index_files/figure-html/unnamed-chunk-7-2.png" /><!-- --></p>
 <pre class="r"><code>flights &lt;- network(city_m, directed = TRUE)
 
 flights %v% &quot;lat&quot; &lt;- as.numeric(city_cor$lat)
 flights %v% &quot;lon&quot; &lt;- as.numeric(city_cor$lon)</code></pre>
 <pre><code>## Warning: NAs introduced by coercion</code></pre>
-<pre class="r"><code>flights %v% &quot;City&quot;&lt;-city_cor$City
+<pre class="r"><code>flights %v% &quot;City&quot;&lt;- city_cor$City
 
 invisible(lapply(c(&quot;ggplot2&quot;, &quot;maps&quot;, &quot;network&quot;, &quot;sna&quot;), base::library, character.only = TRUE))
 
-world &lt;- fortify(map(&quot;world&quot;, plot = FALSE, fill = TRUE))
+world &lt;- fortify(maps::map(&quot;world&quot;, plot = FALSE, fill = TRUE))
 world &lt;- ggplot(world, aes(x = long, y = lat)) +
   geom_polygon(aes(group = group), color = &quot;grey65&quot;,
                fill = &quot;#f9f9f9&quot;, size = 0.2)
 
 a&lt;-as.vector((rnorm(342,0.5,0.4))^2)
-# p &lt;- ggnetworkmap(world,flights,
-#                   node.color = &quot;red3&quot;,
-#                   node.alpha = 0.6,
-#                   great.circles = FALSE,
-#                   segment.color=&quot;gray60&quot;,
-#                   label.nodes = TRUE,
-#                   label.size = 3.5,
-#                   size=10,
-#                   segment.size = a)+
-#   labs(color=&quot;nodes&quot;)
-# plot(p)</code></pre>
+p &lt;- ggnetworkmap(world,flights,
+                  node.color = &quot;red3&quot;,
+                  node.alpha = 0.6,
+                  great.circles = FALSE,
+                  segment.color=&quot;gray60&quot;,
+                  label.nodes = TRUE,
+                  label.size = 3.5,
+                  size=10,
+                  segment.size = a)+
+  labs(color=&quot;nodes&quot;)
+plot(p)</code></pre>
+<pre><code>## Warning: Removed 1 rows containing missing values (geom_point).</code></pre>
+<pre><code>## Warning: Removed 1 rows containing missing values (geom_text).</code></pre>
+<p><img src="index_files/figure-html/unnamed-chunk-7-3.png" /><!-- --></p>
+<pre class="r"><code>library(mapview) 
+library(leaflet)
+#mapview(flights)</code></pre>
 </div>
 </div>
 <div id="results" class="section level1">

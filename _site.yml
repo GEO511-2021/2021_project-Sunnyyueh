@@ -1,4 +1,3 @@
-output_dir: 'docs'
 output:
   html_document:
     theme:  lumen  # choose your theme here: https://bootswatch.com/

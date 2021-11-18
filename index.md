@@ -949,7 +949,7 @@ flights %v% "City"<- city_cor$City
 # world <- fortify(maps::map("world", plot = FALSE, fill = TRUE))
 # world <- ggplot(world, aes(x = long, y = lat)) +
 #   geom_polygon(aes(group = group), color = "grey65",
-#                fill = "#f9f9f9", size = 0.2)
+#                fill = "#f9f9f9", size = 0.2) 
 # 
 # a<-as.vector((rnorm(342,0.5,0.4))^2)
 # p <- ggnetworkmap(world,flights,

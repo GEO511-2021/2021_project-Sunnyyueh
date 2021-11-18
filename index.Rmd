@@ -97,7 +97,7 @@ air.edge<-air.edge %>%
            Destination.airport == "ORG"|Destination.airport == "MAD"|
            Destination.airport == "BOM"|Destination.airport == "ICN")
 
-air.edge
+#air.edge
 air.edge<-merge(air.edge,airport,by.x="Source.airport",by.y="airport",all.x=TRUE)
 names(air.edge)[3]<-"Source"
 air.edge<-merge(air.edge,airport,by.x="Destination.airport",by.y="airport",all.x=TRUE)

@@ -1,3 +1,4 @@
+output_dir: '.'
 output:
   html_document:
     theme:  lumen  # choose your theme here: https://bootswatch.com/

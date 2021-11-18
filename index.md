@@ -55,7 +55,7 @@ library(network)
 library(intergraph)
 library(sna)
 library(ggplot2)
-#library(ggnet)
+library(ggnet)
 library(GGally)
 ```
 
@@ -227,26 +227,36 @@ flights %v% "lon" <- as.numeric(city_cor$lon)
 ```r
 flights %v% "City"<- city_cor$City
 
-# invisible(lapply(c("ggplot2", "maps", "network", "sna"), base::library, character.only = TRUE))
-# 
-# world <- fortify(maps::map("world", plot = FALSE, fill = TRUE))
-# world <- ggplot(world, aes(x = long, y = lat)) +
-#   geom_polygon(aes(group = group), color = "grey65",
-#                fill = "#f9f9f9", size = 0.2) 
-# 
-# a<-as.vector((rnorm(342,0.5,0.4))^2)
-# p <- ggnetworkmap(world,flights,
-#                   node.color = "red3",
-#                   node.alpha = 0.6,
-#                   great.circles = FALSE,
-#                   segment.color="gray60",
-#                   label.nodes = TRUE,
-#                   label.size = 3.5,
-#                   size=10,
-#                   segment.size = a)+
-#   labs(color="nodes")
-# plot(p)
+invisible(lapply(c("ggplot2", "maps", "network", "sna"), base::library, character.only = TRUE))
+
+world <- fortify(maps::map("world", plot = FALSE, fill = TRUE))
+world <- ggplot(world, aes(x = long, y = lat)) +
+  geom_polygon(aes(group = group), color = "grey65",
+               fill = "#f9f9f9", size = 0.2)
+
+a<-as.vector((rnorm(342,0.5,0.4))^2)
+p <- ggnetworkmap(world,flights,
+                  node.color = "red3",
+                  node.alpha = 0.6,
+                  great.circles = FALSE,
+                  segment.color="gray60",
+                  label.nodes = TRUE,
+                  label.size = 3.5,
+                  size=10,
+                  segment.size = a)+
+  labs(color="nodes")
+plot(p)
 ```
+
+```
+## Warning: Removed 1 rows containing missing values (geom_point).
+```
+
+```
+## Warning: Removed 1 rows containing missing values (geom_text).
+```
+
+![](index_files/figure-html/unnamed-chunk-7-3.png)<!-- -->
 
 
 ```r

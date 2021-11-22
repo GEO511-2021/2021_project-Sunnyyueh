@@ -177,7 +177,7 @@ plot(firm.g,
 
 ```{r}
 city_m<-tcrossprod((svm_mat_small), y=NULL)
-diag(city_m)<-0
+diag(city_m)<-0 
 city_m<- as.matrix(city_m)
 city_nw <- graph.incidence(city_m,weighted = T) #network
 plot(city_nw)

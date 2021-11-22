@@ -181,7 +181,7 @@ diag(city_m)<-0
 city_m<- as.matrix(city_m)
 city_nw <- graph.incidence(city_m,weighted = T) #network
 plot(city_nw)
-
+ 
 row.names(city_m)
 
 city_cor<- read.csv2("data/20city_coor_1010.csv", header=TRUE, sep=",")

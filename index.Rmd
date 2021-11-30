@@ -53,7 +53,7 @@ Load any required packages in a code chunk (you may need to install some package
 library(dplyr)
 library(igraph)
 library(network)
-library(intergraph)
+library(intergraph) 
 library(sna)
 library(ggplot2)
 library(ggnet)

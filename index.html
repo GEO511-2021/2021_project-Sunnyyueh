@@ -372,7 +372,7 @@ div.tocify {
 library(dplyr)
 library(igraph)
 library(network)
-library(intergraph)
+library(intergraph) 
 library(sna)
 library(ggplot2)
 library(ggnet)
@@ -485,7 +485,7 @@ plot(firm.g,
      vertex.frame.color=&quot;#ffffff&quot;)   # lwd of edges</code></pre>
 <p><img src="index_files/figure-html/unnamed-chunk-6-1.png" /><!-- --></p>
 <pre class="r"><code>city_m&lt;-tcrossprod((svm_mat_small), y=NULL)
-diag(city_m)&lt;-0
+diag(city_m)&lt;-0 
 city_m&lt;- as.matrix(city_m)
 city_nw &lt;- graph.incidence(city_m,weighted = T) #network
 plot(city_nw)</code></pre>

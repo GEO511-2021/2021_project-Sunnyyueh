@@ -52,7 +52,7 @@ Load any required packages in a code chunk (you may need to install some package
 library(dplyr)
 library(igraph)
 library(network)
-library(intergraph)
+library(intergraph) 
 library(sna)
 library(ggplot2)
 library(ggnet)
@@ -183,7 +183,7 @@ plot(firm.g,
 
 ```r
 city_m<-tcrossprod((svm_mat_small), y=NULL)
-diag(city_m)<-0
+diag(city_m)<-0 
 city_m<- as.matrix(city_m)
 city_nw <- graph.incidence(city_m,weighted = T) #network
 plot(city_nw)

@@ -3,6 +3,5 @@
 .RData
 .Ruserdata
 *cache
-*site_libs*
 *cache*
 *DS_Store

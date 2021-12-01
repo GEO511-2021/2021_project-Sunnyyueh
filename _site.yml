@@ -4,7 +4,7 @@ output:
     theme:  flatly  # choose your theme here: https://bootswatch.com/
     highlight: textmate
     mathjax: null
-    toc: true
+    toc: true 
     toc_depth: 2
     toc_float:
        collapsed: true

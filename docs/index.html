@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+<meta name="author" content="Sunny" />
+
+
+<title>My Final Project Template</title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/flatly.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+
+
+<link rel="stylesheet" href="styles.css" type="text/css" />
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+<style type="text/css">
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #adb5bd;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script type="text/javascript">
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.tab('show');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row">
+<div class="col-sm-12 col-md-4 col-lg-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-sm-12 col-md-8 col-lg-9">
+
+
+
+
+<div class="navbar navbar-inverse  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Spatial Data Science Final Project</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Home</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div id="header">
+
+
+
+<h1 class="title toc-ignore">My Final Project Template</h1>
+<h3 class="subtitle">Economic interaction among cities after COVID-19</h3>
+<h4 class="author">Sunny</h4>
+
+</div>
+
+
+<div id="introduction" class="section level1">
+<h1>Introduction</h1>
+<p>[~ 200 words]</p>
+<p>Clearly stated background and questions / hypotheses / problems being addressed. Sets up the analysis in an interesting and compelling way.</p>
+<p>The outbreak of COVID-19 has caused a huge impact on the global economy. To estimate the global economy, the research scale has shifted from countries to cities, and researchers no longer merely focus on a single economic unit but try to estimate the interactions among cities. Thus, to understand the global economy under COVID-19, it is vital to look into the economic interactions among cities. The data set World City Network (WCN) and airline network have been applied to the research of city network, while WCN could estimate the interlocking network of cities through the global location strategies of Advance Produce Service (APS) firms, and the air links between cities are used to evaluate local economic development. However, the two datasets have difficulties estimating real-time city economic interaction during COVID-19. Thus, this study aims to apply social network analysis (SNA) to identify the possible mechanism of the rapid chaining economic city network. By applying QAP or exponential-family random graph models on WCN and airline datasets, this research will interpret the transformation of the role of cities and the configuration in the network before and after the outbreak of COVID-19.</p>
+</div>
+<div id="materials-and-methods" class="section level1">
+<h1>Materials and methods</h1>
+<p>[~ 200 words]</p>
+<p>Narrative: Clear narrative description of the data sources and methods. Includes data from at least two sources that were integrated / merged in R.</p>
+<p>Code: The code associated with the project is well organized and easy to follow. Demonstrates mastery of R graphics and functions.</p>
+<p>Data: The underlying data are publicly accessible via the web and downloaded/accessed within the Rmd script. If you want to use your own data, you must make it available on a website (e.g. Figshare) so that others are able to re-run your code.</p>
+<p>You can do bullets like this:</p>
+<ul>
+<li>The first most important thing</li>
+<li>The second most important thing</li>
+<li>The third most important thing</li>
+</ul>
+<p>You can do numbers like this:</p>
+<ol style="list-style-type: decimal">
+<li>The first most important thing</li>
+<li>The second most important thing</li>
+<li>The third most important thing</li>
+</ol>
+<p>See <a href="http://rmarkdown.rstudio.com/">http://rmarkdown.rstudio.com/</a> for all the amazing things you can do.</p>
+<p>Here’s my first code chunk.</p>
+<p>Load any required packages in a code chunk (you may need to install some packages):</p>
+<pre class="r"><code># devtools::install_github(&quot;briatte/ggnet&quot;)
+# install.packages(&quot;ggnet&quot;)
+library(dplyr)
+library(igraph)
+library(network)
+library(intergraph)
+library(sna)
+library(ggplot2)
+#library(ggnet)
+library(GGally)</code></pre>
+<div id="download-and-clean-all-required-data" class="section level2">
+<h2>Download and clean all required data</h2>
+<pre class="r"><code>svm &lt;- read.csv2(&quot;data/da28_svm2016.csv&quot;, header=TRUE, sep=&quot;,&quot;)
+air.edge&lt;-read.table(&quot;data/2014 airline .csv&quot;,sep=&quot;,&quot;,header = T)
+airport_name&lt;-read.csv2(&quot;data/airport0825.csv&quot;,sep=&quot;,&quot;,header = T) </code></pre>
+</div>
+<div id="combining-airline-data-and-airport-data" class="section level2">
+<h2>combining airline data and airport data</h2>
+<pre class="r"><code>airport&lt;-c(&#39;JFK&#39;,&#39;LCY&#39;,&#39;HKG&#39;,&#39;SIN&#39;,&#39;PVG&#39;,&#39;PEK&#39;,&#39;CDG&#39;,&#39;HND&#39;,&#39;DXB&#39;,&#39;ORD&#39;,&#39;SYD&#39;,&#39;FRA&#39;,&#39;GRU&#39;,&#39;DCA&#39;,&#39;LAX&#39;,&#39;YYZ&#39;,&#39;MXP&#39;,&#39;MAD&#39;,&#39;BOM&#39;,&#39;ICN&#39;)
+city_list&lt;-c(&quot;London&quot;,&quot;New York&quot;,&quot;Hong Kong&quot;,&quot;Singapore&quot;,&quot;Shanghai&quot;,&quot;Paris&quot;,&quot;Beijing&quot;,&quot;Tokyo&quot;,&quot;Chicago&quot;,&quot;Dubai&quot;,&quot;Sydney&quot;,&quot;Frankfurt&quot;, &quot;Sao Paulo&quot;,&quot;Washington&quot;,&quot;Los Angeles&quot;,&quot;Milan&quot;,&quot;Madrid&quot;, &quot;Mumbai&quot;,&quot;Toronto&quot;,&quot;Moscow&quot;)
+
+airport&lt;-cbind(airport,city_list)
+air.edge&lt;-air.edge %&gt;%
+  filter(Source.airport == &quot;JFK&quot;|Source.airport == &quot;LCY&quot;|
+           Source.airport == &quot;HKG&quot;|Source.airport == &quot;SYD&quot;|
+           Source.airport == &quot;SIN&quot;|Source.airport == &quot;FRA&quot;|
+           Source.airport == &quot;PVG&quot;|Source.airport == &quot;GRU&quot;|
+           Source.airport == &quot;PEK&quot;|Source.airport == &quot;DCA&quot;|
+           Source.airport == &quot;CDG&quot;|Source.airport == &quot;LAX&quot;|
+           Source.airport == &quot;HND&quot;| Source.airport == &quot;YYZ&quot;|
+           Source.airport == &quot;DXB&quot;|Source.airport == &quot;MXP&quot;|
+           Source.airport == &quot;ORG&quot;|Source.airport == &quot;MAD&quot;|
+           Source.airport == &quot;BOM&quot;|Source.airport == &quot;ICN&quot;)
+
+air.edge&lt;-air.edge %&gt;%
+  filter(Destination.airport == &quot;JFK&quot;|Destination.airport == &quot;LCY&quot;|
+           Destination.airport == &quot;HKG&quot;|Destination.airport == &quot;SYD&quot;|
+           Destination.airport == &quot;SIN&quot;|Destination.airport == &quot;FRA&quot;|
+           Destination.airport == &quot;PVG&quot;|Destination.airport == &quot;GRU&quot;|
+           Destination.airport == &quot;PEK&quot;|Destination.airport == &quot;DCA&quot;|
+           Destination.airport == &quot;CDG&quot;|Destination.airport == &quot;LAX&quot;|
+           Destination.airport == &quot;HND&quot;| Destination.airport == &quot;YYZ&quot;|
+           Destination.airport == &quot;DXB&quot;|Destination.airport == &quot;MXP&quot;|
+           Destination.airport == &quot;ORG&quot;|Destination.airport == &quot;MAD&quot;|
+           Destination.airport == &quot;BOM&quot;|Destination.airport == &quot;ICN&quot;)
+
+#air.edge
+air.edge&lt;-merge(air.edge,airport,by.x=&quot;Source.airport&quot;,by.y=&quot;airport&quot;,all.x=TRUE)
+names(air.edge)[3]&lt;-&quot;Source&quot;
+air.edge&lt;-merge(air.edge,airport,by.x=&quot;Destination.airport&quot;,by.y=&quot;airport&quot;,all.x=TRUE)
+names(air.edge[4])&lt;-&quot;Destination&quot;
+air.edge&lt;-air.edge[3:4]</code></pre>
+<pre class="r"><code>air.g&lt;- graph.data.frame(air.edge,directed = F)
+#V(air.g)$name&lt;-V(air.g)$city_list  
+
+plot(air.g,
+     vertex.color=&quot;darkgoldenrod1&quot;,  #node color
+     vertex.size=15,# node size
+     node.alpha = 0.6,
+     vertex.label.color=&quot;black&quot;,  #text color
+     vertex.label.dist=3,   # text of distance from node
+     edge.color=&quot;grey74&quot;,   #edges color
+     edge.width=0.5,
+     layout=layout_nicely(air.g),
+     alpha=0.5)</code></pre>
+<p><img src="index_files/figure-html/unnamed-chunk-5-1.png" /><!-- --></p>
+<pre class="r"><code>Cities &lt;- rownames(svm)
+Firms &lt;- colnames(svm)
+# svm &lt;- svm[,-c(1:3)]
+row.names(svm) &lt;- Cities
+svm_mat &lt;- data.matrix(svm, rownames.force=TRUE)
+
+#finding top 20 firms 
+firm_sum&lt;-as.data.frame(colSums(svm_mat))
+firm20&lt;-firm_sum%&gt;%
+  arrange(desc(colSums(svm_mat)))%&gt;%
+  slice(n=1:20)
+firm_list&lt;-row.names(firm20)
+
+
+#finding top 20 cities
+city_sum&lt;-as.data.frame(rowSums(svm_mat))
+city20&lt;-city_sum%&gt;%
+  arrange(desc(rowSums(svm_mat)))%&gt;%
+  slice(n=1:20)
+city_list&lt;-row.names(city20)
+
+
+svm_mat_small&lt;-svm_mat[city_list,]
+svm_mat_small&lt;-svm_mat_small[,firm_list]
+
+
+city_m&lt;-tcrossprod(svm_mat_small, y=NULL)
+firm_m&lt;-tcrossprod(t(svm_mat_small), y=NULL)
+
+# nw &lt;- cbind(rbind(firm_nw, diag(20)), rbind(diag(20), city_nw))
+# nw &lt;- network(nw, directed = T)
+# nw%v%&quot;layer.mem&quot; &lt;- c(rep(1, 20), rep(2, 20))
+# nw%v%&quot;type&quot; &lt;- rep(types, 2)
+
+diag(firm_m)&lt;-0
+firm_m&lt;-firm_m*0.01
+firm_m&lt;-rbind(firm_m[1:15,]*0,firm_m[16:20,])
+firm.g&lt;- graph.adjacency(firm_m, mode=&quot;undirected&quot;,weighted = NULL) #igraph
+#plot(firm.g)
+plot(firm.g, 
+     vertex.color=&quot;steelblue2&quot;,  #node color
+     vertex.size=15,# node size
+     vertex.label.color=&quot;black&quot;,  #text color
+     vertex.label.dist=3,   # text of distance from node
+     edge.color=&quot;grey74&quot;,   #edges color
+     edge.width=0.5,
+     alpha=0.5,
+     vertex.shape=&quot;square&quot;,
+     layout=layout_nicely(firm.g),
+     vertex.frame.color=&quot;#ffffff&quot;)   # lwd of edges</code></pre>
+<p><img src="index_files/figure-html/unnamed-chunk-6-1.png" /><!-- --></p>
+<pre class="r"><code>city_m&lt;-tcrossprod((svm_mat_small), y=NULL)
+diag(city_m)&lt;-0
+city_m&lt;- as.matrix(city_m)
+city_nw &lt;- graph.incidence(city_m,weighted = T) #network
+plot(city_nw)</code></pre>
+<p><img src="index_files/figure-html/unnamed-chunk-7-1.png" /><!-- --></p>
+<pre class="r"><code>row.names(city_m)</code></pre>
+<pre><code>##  [1] &quot;665&quot; &quot;707&quot; &quot;581&quot; &quot;664&quot; &quot;627&quot; &quot;448&quot; &quot;686&quot; &quot;671&quot; &quot;690&quot; &quot;698&quot; &quot;629&quot; &quot;673&quot;
+## [13] &quot;573&quot; &quot;697&quot; &quot;638&quot; &quot;667&quot; &quot;696&quot; &quot;646&quot; &quot;589&quot; &quot;601&quot;</code></pre>
+<pre class="r"><code>city_cor&lt;- read.csv2(&quot;data/20city_coor_1010.csv&quot;, header=TRUE, sep=&quot;,&quot;)
+
+
+
+city_nw&lt;-set_vertex_attr(graph=city_nw,name=&quot;lat&quot;, value=city_cor$lat)
+city_nw&lt;-set_vertex_attr(graph=city_nw,name=&quot;lon&quot;, value=city_cor$lon)
+
+plot(city_nw)# feed centroid coordinates to igraph)</code></pre>
+<p><img src="index_files/figure-html/unnamed-chunk-7-2.png" /><!-- --></p>
+<pre class="r"><code>flights &lt;- network(city_m, directed = TRUE)
+
+flights %v% &quot;lat&quot; &lt;- as.numeric(city_cor$lat)
+flights %v% &quot;lon&quot; &lt;- as.numeric(city_cor$lon)</code></pre>
+<pre><code>## Warning: NAs introduced by coercion</code></pre>
+<pre class="r"><code>flights %v% &quot;City&quot;&lt;- city_cor$City
+
+# invisible(lapply(c(&quot;ggplot2&quot;, &quot;maps&quot;, &quot;network&quot;, &quot;sna&quot;), base::library, character.only = TRUE))
+# 
+# world &lt;- fortify(maps::map(&quot;world&quot;, plot = FALSE, fill = TRUE))
+# world &lt;- ggplot(world, aes(x = long, y = lat)) +
+#   geom_polygon(aes(group = group), color = &quot;grey65&quot;,
+#                fill = &quot;#f9f9f9&quot;, size = 0.2) 
+# 
+# a&lt;-as.vector((rnorm(342,0.5,0.4))^2)
+# p &lt;- ggnetworkmap(world,flights,
+#                   node.color = &quot;red3&quot;,
+#                   node.alpha = 0.6,
+#                   great.circles = FALSE,
+#                   segment.color=&quot;gray60&quot;,
+#                   label.nodes = TRUE,
+#                   label.size = 3.5,
+#                   size=10,
+#                   segment.size = a)+
+#   labs(color=&quot;nodes&quot;)
+# plot(p)</code></pre>
+<pre class="r"><code>library(mapview) 
+library(leaflet)
+#mapview(flights)</code></pre>
+</div>
+</div>
+<div id="results" class="section level1">
+<h1>Results</h1>
+<p>[~200 words]</p>
+<p>Tables and figures (maps and other graphics) are carefully planned to convey the results of your analysis. Intense exploration and evidence of many trials and failures. The author looked at the data in many different ways before coming to the final presentation of the data.</p>
+<p>Show tables, plots, etc. and describe them.</p>
+</div>
+<div id="conclusions" class="section level1">
+<h1>Conclusions</h1>
+<p>[~200 words]</p>
+<p>Clear summary adequately describing the results and putting them in context. Discussion of further questions and ways to continue investigation.</p>
+</div>
+<div id="references" class="section level1">
+<h1>References</h1>
+<p>All sources are cited in a consistent manner</p>
+</div>
+
+<!-- give the footer some space -->
+<br/>
+<br/>
+
+<footer id="site-footer">
+  <div id="footer1">
+  This website is a project for Adam Wilson's <a href="https://wilsonlab.io/GEO511"><i> Spatial Data Science (GEO511) </i></a>Course at the University at Buffalo
+  </div>
+  <div id="footer2">
+  <a rel="license" property="http://creativecommons.org/ns#license"
+  href="http://creativecommons.org/licenses/by/4.0/" ><img src="img/cc-by.svg" alt="cc-by"/></a> 
+  </div>
+</footer>
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+
+</body>
+</html>

@@ -1,105 +1,271 @@
 ---
 title: "My Final Project Template"
-author: Your name here
-subtitle: Subtitle here if desired
+author: Sunny
+subtitle: "The relationship between crime rate and socio-economic variables: in the case of New York City"
+output:
+  html_document:
+    keep_md: true 
 ---
 
 # Introduction
 
-[~ 200 words]
+[~ 200 words]   
 
-Clearly stated background and questions / hypotheses / problems being addressed. Sets up the analysis in an interesting and compelling way.
+Crime is an important socio-economic problem affecting everyone’s life. Large cities such as New York City and Los Angeles, where have a high density of population and a mixture of ethnicities are often have a higher crime rate. Moreover, crimes may occur from multiple reasons and background. Different socio-economic status such as income, education level, ethnicities and age could urge people to commit crimes due to different reasons. Hence, it is confirmed that there are certain connections between crime rate and socio-economic variables.
+
+New York City is the largest city in USA, which has the largest population is often seen as a dangerous and unsafe region where people feel insecure to walk alone at night in certain area. Certain regions in NYC are seen relatively dangerous comparing with others, such as Brownsville, Midtown and Bedford area. The region mentioned above are areas considered dangerous places in the city. Therefore, it is obvious that there is a certain spatial pattern among the crimes that happened in NYC.
+
 
 # Materials and methods
 
 [~ 200 words]
 
-Narrative: Clear narrative description of the data sources and methods. Includes data from at least two sources that were integrated / merged in R.
+The study area in this study will be the entire New York City, which included 5 surrounded counties: New York County, Kings County, Queens County, Bronx County Richmond County. 
 
-Code: The code associated with the project is well organized and easy to follow. Demonstrates mastery of R graphics and functions.
+The polygon data will be the census tract in NYC region, which includes 2167 census tracts in total. Each census tract will include its respective socio-economic variables, such as: Education level in each age group, housing variables, gini Index (income and wealth equality), median income, median age, ethnicities proportion, unemployed rate.The socio-economic variables data was originaly a csv file downloaded from the  US census Bureau, and merged with the polygon data in R afterwards.
 
-Data: The underlying data are publicly accessible via the web and downloaded/accessed within the Rmd script. If you want to use your own data, you must make it available on a website (e.g. Figshare) so that others are able to re-run your code.
-
-You can do bullets like this:
-
-* The first most important thing
-* The second most important thing
-* The third most important thing
-
-You can do numbers like this:
-
-1. The first most important thing
-2. The second most important thing
-3. The third most important thing
-
-See [http://rmarkdown.rstudio.com/](http://rmarkdown.rstudio.com/) for all the amazing things you can do.
-
-
-Here's my first code chunk.
-```{r}
-1+2
-```
+The crime data is originally downloaded from NYPD. Which is the point data of all the crimes committed in 2021 with its longitude and latitude included. In order to know how many crimes happened in each census tract, the points of crimes in each polygon will be counted, and set as the number of crimes of the respective census tract.  
 
 Load any required packages in a code chunk (you may need to install some packages):
 
-```{r, message=F, warning=F}
+```{r,message=FALSE,warning=FALSE}
+library(tidycensus)
+census_api_key("194dc0f83d1499575346fa0ee9bfc523fe9bfc5c",install = TRUE,overwrite=TRUE)
+remotes::install_github("walkerke/tidycensus",force = TRUE)
 library(tidyverse)
+library(tidycensus)
+library(sf);library(ggplot2);library(raster) ;library(sp);library(GISTools)
+library(dplyr)
+library(rgdal)
+library(magrittr)
+library(lubridate)#date
 library(leaflet)
-library(kableExtra)
-knitr::opts_chunk$set(cache=TRUE)  # cache the results for quick compiling
+library(spdep);library(rgdal)
+library(viridis)
+library(mapview)
+library(RColorBrewer)
+library(rgeos)
+library(plotly)
 ```
 
-## Download and clean all required data
-```{r}
-n=20
-data=data.frame(x=runif(n,-180,180),
-                y=runif(n,-60,60),
-                size = runif(n, 5, 20),
-                category = factor(
-                  sample(letters[1:5], n, replace = TRUE)
-                  ),
-                value = rnorm(n))
+#Download and clean all required data
+```{r,message=FALSE,warning=FALSE}
+
+crime_sf<-  st_read("/Users/sunnyyueh/Desktop/Fall 2021/GEO511_Spatial Data Science/final project2/2021_project-Sunnyyueh/data/NYPD Complaint Data Current (Year To Date)/geo_export_c997cf64-043f-4357-8697-b4f38b7b2635.shp")
+
+df2<-read.csv("/Users/sunnyyueh/Desktop/Fall 2021/GEO511_Spatial Data Science/final project2/2021_project-Sunnyyueh/data/newdata.csv")
+shp<-st_read("/Users/sunnyyueh/Desktop/Fall 2021/GEO511_Spatial Data Science/final project2/2021_project-Sunnyyueh/data/Data_count_lisa.csv")
+#cen<-read.csv("/Users/sunnyyueh/Desktop/Fall 2021/GEO511_Spatial Data Science/2021_project-Sunnyyueh/data/1208_cen.csv")
+
 ```
 
-```{r, results='asis'}
-data %>% 
-  slice(1:10) %>% #show only 1:n rows
-  kable(digits=2,align="c")%>% #make table and round to two digits
-  kable_styling(bootstrap_options = 
-                  c("striped", "hover", "condensed", "responsive")) #apply other formatting
+
+```{r,message=FALSE,warning=FALSE}
+shp$meidan_income<-shp$estimate
+shp<-shp[-5]
+
+
+shp$GEOID<-as.double(shp$GEOID)
+
+df<-left_join(df2,shp,by="GEOID")
+
+NY=df
+NY2=df
+
+NY_select2<-NY2[,c(13:19,21,25:27,28:29,47,65,82:89,98:102,104,106,1,103,104,106)]
+
+
+#NY_select2[1:30]<-as.numeric(unlist(NY_select2[1:30]))
+NY_select2[1:34]<-as.numeric(unlist(NY_select2[1:34]))
+#NY<-NY_select2%>%drop_na()
+
+NY<-NY_select2
+
+
 ```
 
-Add any additional processing steps here.
+```{r,message=FALSE,warning=FALSE,echo=FALSE,results='hide',fig.keep='all'}
+NY.lasso=NY
+
+
+counties <- c("New York County",
+              "Kings County",
+              "Queens County",
+              "Bronx County",
+              "Richmond County")
+my_vars <- c(median_income = "B19013_001")
+new_york <- map(counties,
+                ~ get_acs(
+                  geography = "tract", 
+                  state = "NY",
+                  county = .x,
+                  geometry = TRUE,
+                  variables = my_vars
+                ))
+new_york <- rbind(new_york[[1]], 
+                  new_york[[2]], 
+                  new_york[[3]], 
+                  new_york[[4]], 
+                  new_york[[5]])
+
+NY.lasso$GEOID<- as.character(NY.lasso$GEOID)
+NY.lasso.poly<-left_join(x=new_york,y=NY.lasso,by="GEOID")
+
+st_crs(crime_sf)<-st_crs(NY.lasso.poly)
+
+NY.lasso.poly <- NY.lasso.poly %>% 
+  mutate(counts = lengths(st_intersects(., crime_sf)))
+
+
+
+```
+
+# Differnt socio-economic spatial distribution
+```{r,message=FALSE}
+  
+
+
+mapview::mapview(NY.lasso.poly, zcol="counts",alpha.regions=0.6)
+mapview::mapview(NY.lasso.poly, zcol="Total.Population" ,alpha.regions=0.6)
+
+
+NY.lasso.poly$meidan_income[is.na(NY.lasso.poly$meidan_income)]<-mean(NY.lasso.poly$meidan_income,na.rm=TRUE)
+mapview::mapview(NY.lasso.poly, zcol="meidan_income",alpha.regions=0.6)
+
+
+```
+
+# Differnt socio-economic in comparison
+```{r,message=FALSE}
+
+county_list<-str_split(df$Qualifying.Name.x, pattern = ",", n = Inf, simplify = TRUE)
+df$county_list<-county_list[,2]
+df2<-df[40:107]
+df2[8:67]<-as.numeric(unlist(df2[8:67]))
+
+
+fig <- plot_ly(data = df2, x = ~counts, y = ~Total.Population,color=~county_list,size=~counts)
+fig <- fig %>% layout(title = 'Number of cirmes and Total population in the 5 counties',
+         yaxis = list(zeroline = FALSE),
+         xaxis = list(zeroline = FALSE))
+fig
+
+df2$counts<-df2$counts %>% replace_na(0)
+t<-df2%>%
+  group_by(county_list)%>%
+  summarize(sum_crime = sum(counts))
+
+fig <- plot_ly(t, x = ~county_list, y = ~sum_crime, type = 'bar',color=~county_list)
+fig <- fig %>% layout(title = 'Total number of cirmes in the 5 counties',
+         yaxis = list(zeroline = FALSE),
+         xaxis = list(zeroline = FALSE))
+fig
+
+fig <- plot_ly(data = df2, x = ~counts, y = ~meidan_income,color=~counts,size=~meidan_income)
+fig <- fig %>% layout(title = 'Number of cirmes and median income',
+         yaxis = list(zeroline = FALSE),
+         xaxis = list(zeroline = FALSE))
+fig
+
+fig <- plot_ly(data = df2, x = ~counts, y = ~Total.Population..Hispanic.or.Latino,color=~counts,size=~Total.Population..Hispanic.or.Latino)
+fig <- fig %>% layout(title = 'Number of cirmes and percentage of hispanic or latino population',
+         yaxis = list(zeroline = FALSE),
+         xaxis = list(zeroline = FALSE))
+fig
+
+#colnames(df2)
+```
+
+
+
+# Local Indicators of Spatial Association (LISA) of crimes
+```{r,message=FALSE}
+data_sf_summary_nona<- NY.lasso.poly[ ! st_is_empty( NY.lasso.poly ) , ]
+LISA.poly <- as_Spatial(data_sf_summary_nona)
+
+
+Li.nb=poly2nb(LISA.poly)
+Li.nb.in=include.self(Li.nb)
+Li.nb.w.in=nb2listw(Li.nb.in, zero.policy=T)
+LG.li=as.vector(localG(LISA.poly$counts,Li.nb.w.in))
+LISA.poly$LG.li=LG.li
+
+mapview::mapview(LISA.poly,
+                 zcol="LG.li",
+                 col.regions =viridis::"magma")
+
+
+
+G=LISA.poly$LG.li
+quad=rep("Uncluster",length(G)) 
+quad[G>1.65]="Cluster"
+LISA.poly$spatial=quad
+
+
+mapview::mapview(LISA.poly,
+                 zcol="spatial",col.regions=c("darkred","grey"),alpha=0.5,alpha.regions=0.6)
+LISA.df<-as.data.frame(LISA.poly)
+
+
+fig <- plot_ly(data = LISA.df, x = ~counts, y = ~Total.Population,color=~spatial,size=~Total.Population,colors=c("darkred","grey"))
+fig <- fig %>% layout(title = 'Number of cirmes and Total population in each census tract',
+         yaxis = list(zeroline = FALSE),
+         xaxis = list(zeroline = FALSE))
+fig
+
+```
+
+
+
+```{r,message=FALSE}
+try<-sf::st_make_valid(NY.lasso.poly)
+centro_crime <- st_centroid(st_as_sf(try))
+centro_crime_nona<- centro_crime [ ! st_is_empty( centro_crime) , ]
+centro_crime_sp <- as_Spatial(centro_crime_nona)
+
+centro_crime<- centro_crime[ ! st_is_empty(centro_crime) , ]
+centro_crime_new <- as_Spatial(centro_crime)
+
+
+mapview::mapview(centro_crime_new,
+                 zcol="counts",
+                 col.regions =viridis::"magma",
+                 cex=2,
+                 alpha=0
+)
+
+```
+
+# Multi-variable saptial distribution
+```{r,message=FALSE}
+pal <- grDevices::colorRampPalette(RColorBrewer::brewer.pal(9, "YlOrRd"))
+mapview::mapview(NY.lasso.poly, zcol="counts",alpha.regions=0.6)+
+  mapview::mapview(centro_crime_new,zcol="Total.Population",cex=2,alpha.regions=0.6,alpha=0,col.regions=pal(1816))
+```
 
 # Results
 
 [~200 words]
 
-Tables and figures (maps and other graphics) are carefully planned to convey the results of your analysis. Intense exploration and evidence of many trials and failures. The author looked at the data in many different ways before coming to the final presentation of the data.
 
-Show tables, plots, etc. and describe them.
+In the first crime number map, it is shown that New York County and Bronx county have the highest number of crimes in the study area, while Richmond county has the least number. As for the total population and median income map, they have a similar spatial pattern as the crime map. But the highest value of the median income map is at the southern part of Manhattan Island, where is Wall Street located. This indicates that the residents in that area have higher incomes than others. Therefore, it might be reasonable that the location with the highest crime isn't located where Wall Street is.
 
-```{r, fig.width=6, fig.height=3, fig.cap="Map of completely random data"}
-m <- leaflet(data) %>% 
-  addTiles() %>% 
-  addCircleMarkers(~x, ~y, radius = ~size,color = ~as.factor(category)) %>% 
-  addPopups(~x[2], ~y[2], "Random popup")
-m  # a map with the default OSM tile layer
-```
+On the other hand, in the scatter plot which displays the relationship between total population and crime numbers in different counties, New York county seems to have the highest population and crime number in total, while Richmond has the least. However, the histogram below shows that Kings county actually has the highest crime number in total, which is an interesting discovery. 
 
-
-```{r}
-data %>% 
-  ggplot(aes(x=x,y=y,col=category))+
-  geom_point()
-```
 
 # Conclusions
 
 [~200 words]
 
-Clear summary adequately describing the results and putting them in context. Discussion of further questions and ways to continue investigation.
+In sum, the crime number in Manhattan Island is much higher than the other regions, while the other variables such as median income and total population both have the same pattern as crime numbers. Thus, it is possible that there are more crimes happening on Manhattan Island is due to a higher population, which higher population and more complex population composition may cause more social issues. On the other hand, if we compare it with the LISA and cluster map, there are also two significant hot-spot of crimes clustering in the downtown and uptown of Manhattan Island. Thus, we can conclude that the downtown and uptown area of Manhattan Island might be the most dangerous region in New York City. However, there are still some hot-spot located in a certain part of Kings county, but it is not significantly clustered. And the previous result also shows that Kings county has the highest crime number in total. This might occur due to the area of Kings county being much bigger and it covers more area than other counties. 
+
+Therefore, we can conclude that if we want to look into the spatial distribution of a certain topic, merely examining the number could cause misunderstanding. It is vital to visualize the topic spatially and observe the topic with its spatial pattern. 
+ 
 
 # References
 
-All sources are cited in a consistent manner
+Briggs, S., & Opsal, T. (2012). The influence of victim ethnicity on arrest in violent crimes. Criminal Justice Studies, 25(2), 177-189. 
+Entorf, H., & Spengler, H. (2000). Socioeconomic and demographic factors of crime in Germany: Evidence from panel data of the German states. International review of law and economics, 20(1), 75-106. 
+Walsh, Z., & Kosson, D. S. (2007). Psychopathy and violent crime: A prospective study of the influence of socioeconomic status and ethnicity. Law and human behavior, 31(2), 209-229. 
+Wood, L., Sulley, C., Kammer-Kerwick, M., Follingstad, D., & Busch-Armendariz, N. (2017). Climate surveys: An inventory of understanding sexual assault and other crimes of interpersonal violence at institutions of higher education. Violence against women, 23(10), 1249-1267. 
+
